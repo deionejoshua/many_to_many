@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Name: {{one_author.first_name}} {{one_author.last_name}}
+    <br>
+    ID: {{one_author.id}}
+    <br>
+    Notes: {{one_author.notes}}
+    <br>
+    <br>
+    <br>
+    
+
+    Books:
+    {% for book in one_author.Books.all %}
+        <p>{{book.title}}</p>
+    {%endfor%}
+    <br>
+    <br>
+    <form action="/second_manytomany" method="post">
+        {%csrf_token%}
+        <label for="books">select a book</label>
+        <select name="book_id" id="">
+    
+            {% for book in all_books %}
+            <option value="{{book.id}}">{{book.title}}</option>
+            {%endfor%}
+        </select>
+        <input type="hidden" name="author_id" value="{{one_author.id}}">
+        <br>
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>
+
+
+
